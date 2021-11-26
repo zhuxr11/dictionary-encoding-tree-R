@@ -38,7 +38,7 @@ Suppose there are some strings of length <%= digit %>. We need to encode them fr
 
 We attempt this question with tree-based method. A series of <%= digit %>-layered trees is built so that the first layer contains `a-y` and for each node there are branches to `a-y` in the next layer until the trees reach their designated number of layers. The code for the string is the number of nodes in total to the left of the path (including the nodes on the path) minus 1, since it is 0-based. Please note the possible missing characters while counting the nodes.
 
-```{r tree-plot, out.width="50%", results='asis'}
+```{r tree-plot, out.width="50%", message=FALSE, results='asis'}
 library(tidyverse)
 library(data.tree)
 gen_code_tree_list <- function(name = "Root", dictionary, max_depth) {
@@ -129,7 +129,7 @@ encode_str <- function(str, digit, dictionary) {
 
 Then we test the function with some imputs.
 
-```{r encode-test, message=FALSE, error=TRUE}
+```{r encode-test, error=TRUE}
 # Define encoding digits and dictionary (a-y)
 digit <- 4L
 dictionary <- letters[-length(letters)]

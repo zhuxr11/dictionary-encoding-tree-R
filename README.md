@@ -1,8 +1,8 @@
 
 # Encoding fixed-length strings with tree-based method from a dictionary
 
-**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:12:36<br />
-**Compiled**: 2021-11-26 16:12:38
+**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:14:41<br />
+**Compiled**: 2021-11-26 16:14:44
 
 ## Introduction
 
@@ -30,14 +30,6 @@ characters while counting the nodes.
 
 ``` r
 library(tidyverse)
-#> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-#> v ggplot2 3.3.5     v purrr   0.3.4
-#> v tibble  3.1.3     v dplyr   1.0.7
-#> v tidyr   1.1.3     v stringr 1.4.0
-#> v readr   2.0.1     v forcats 0.5.1
-#> -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-#> x dplyr::filter() masks stats::filter()
-#> x dplyr::lag()    masks stats::lag()
 library(data.tree)
 gen_code_tree_list <- function(name = "Root", dictionary, max_depth) {
   if (max_depth >= 1L) {
