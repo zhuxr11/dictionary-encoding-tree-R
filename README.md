@@ -1,8 +1,8 @@
 
 # Encoding fixed-length strings with tree-based method from a dictionary
 
-**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:08:20<br />
-**Compiled**: 2021-11-26 16:08:23
+**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:12:36<br />
+**Compiled**: 2021-11-26 16:12:38
 
 ## Introduction
 
@@ -13,7 +13,7 @@ tree-based method from a dictionary.
 
 Suppose there are some strings of length 4. We need to encode them from
 a dictionary of small letters `a-y`. The code starts from 0 for `a`,
-then 1 for `aa`, 2 for `aaa`, 3 for `aaaa`, …, then `aab`, …, `aaba`, …,
+then 1 for `aa`, 2 for `aaa`, 3 for `aaaa`, …, then `aab`, `aaba`, …,
 `b`, … Develop a function to convert strings to their corresponding
 codes. For example, with strings of length 4, `baca` should be encoded
 as `16331`.

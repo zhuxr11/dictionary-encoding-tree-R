@@ -32,7 +32,7 @@ This paper introduced a pipeline to encode strings of fixed length with tree-bas
 
 ## Question
 
-Suppose there are some strings of length <%= digit %>. We need to encode them from a dictionary of small letters `a-y`. The code starts from 0 for `a`, then 1 for `aa`, 2 for `aaa`, 3 for `aaaa`, ..., then `aab`, ..., `aaba`, ..., `b`, ... Develop a function to convert strings to their corresponding codes. For example, with strings of length 4, `baca` should be encoded as `16331`.
+Suppose there are some strings of length <%= digit %>. We need to encode them from a dictionary of small letters `a-y`. The code starts from 0 for `a`, then 1 for `aa`, 2 for `aaa`, 3 for `aaaa`, ..., then `aab`, `aaba`, ..., `b`, ... Develop a function to convert strings to their corresponding codes. For example, with strings of length 4, `baca` should be encoded as `16331`.
 
 ## Solution
 
