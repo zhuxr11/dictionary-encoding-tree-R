@@ -1,8 +1,8 @@
 
 # Encoding fixed-length strings with tree-based method from a dictionary
 
-**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:14:41<br />
-**Compiled**: 2021-11-26 16:14:44
+**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-26 16:16:11<br />
+**Compiled**: 2021-11-26 16:16:13
 
 ## Introduction
 
@@ -120,7 +120,7 @@ encode_str <- function(str, digit, dictionary) {
 }
 ```
 
-Then we test the function with some imputs.
+Then, we test the function with some inputs.
 
 ``` r
 # Define encoding digits and dictionary (a-y)

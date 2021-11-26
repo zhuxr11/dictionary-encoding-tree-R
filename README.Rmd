@@ -127,7 +127,7 @@ encode_str <- function(str, digit, dictionary) {
 }
 ```
 
-Then we test the function with some imputs.
+Then, we test the function with some inputs.
 
 ```{r encode-test, error=TRUE}
 # Define encoding digits and dictionary (a-y)
