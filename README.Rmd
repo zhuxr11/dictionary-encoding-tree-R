@@ -147,3 +147,10 @@ encode_str("aaabb", digit, dictionary)
 encode_str(c("abs", "abz"), digit, dictionary)
 ```
 
+## Session info
+
+This file was compiled with the following packages and versions:
+
+```{r session-info-r}
+utils::sessionInfo()
+```
