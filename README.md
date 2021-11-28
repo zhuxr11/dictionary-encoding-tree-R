@@ -1,8 +1,8 @@
 
 # Encoding fixed-length strings with tree-based method from a dictionary
 
-**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-27 16:19:59<br />
-**Compiled**: 2021-11-27 16:20:02
+**Author**: Xiurui Zhu<br /> **Modified**: 2021-11-28 11:44:35<br />
+**Compiled**: 2021-11-28 11:44:38
 
 ## Introduction
 
@@ -25,8 +25,7 @@ trees is built so that the first layer contains `a-y` and for each node
 there are branches to `a-y` in the next layer until the trees reach
 their designated number of layers. The code for the string is the number
 of nodes in total to the left of the path (including the nodes on the
-path) minus 1, since it is 0-based. Please note the possible missing
-characters while counting the nodes.
+path) minus 1, since it is 0-based.
 
 ``` r
 library(tidyverse)
@@ -58,11 +57,12 @@ file.path("README_files", paste0("tree_", 1:2, ".png")) %>%
 
 <img src="README_files/tree_1.png" width="50%" /><img src="README_files/tree_2.png" width="50%" />
 
-The computation formula is as follows, where *n* stands for number of
-digits, *l* stands for the length of dictionary and *p* stands for the
-positions of digits in the dictionary:
+The computation formula is as follows, where *n* stands for the number
+of tree layers, *k* stands for the length of the path, *l* stands for
+the length of dictionary and *p* stands for the positions of digits in
+the dictionary:
 
-![formula](README_files/code_formula.png)
+<img src="README_files/code_formula.png" width="30%" style="display: block; margin: auto;" />
 
 We develop the encoding function as follows:
 
@@ -77,15 +77,9 @@ encode_str <- function(str, digit, dictionary) {
   digit_idx <- str %>%
     stringr::str_extract_all(".") %>%
     purrr::map(~ {
-      result <- .x %>%
+      .x %>%
         factor(levels = dictionary) %>%
         as.integer()
-      # Add missing letters as 0 nodes to count
-      if (length(result) < digit) {
-        missing_digits <- digit - length(result)
-        result <- c(result, rep(0L, missing_digits))
-      }
-      result
     })
   # Check validity of each string against out-of-dictionary characters
   invalid_lgl <- digit_idx %>%
@@ -96,23 +90,19 @@ encode_str <- function(str, digit, dictionary) {
   
   # Output code for each string
   digit_idx %>%
-    purrr::map_dbl(function(digit_idx_one) {
+    purrr::map_dbl(function(digit_idx_str) {
       (
-        purrr::map_dbl(seq_len(digit), function(x) {
+        purrr::map_dbl(seq_len(length(digit_idx_str)), function(i) {
           (
-            # Sum the nodes in the trees to the left on current layer
-            purrr::map_dbl(seq_len(x - 1L), function(y) {
-              # Count the nodes on each layer
-              # Limit the minimal node count to 0 to handle missing characters
-              max(digit_idx_one[y] - 1, 0) * length(dictionary)^(x - y)
+            purrr::map_dbl(c(0L, seq_len(digit - i)), function(j) {
+              length(dictionary)^j
             }) %>%
-              purrr::reduce(sum, .init = 0)
-          ) +
-            # Add the nodes to the left in the tree of current path 
-            digit_idx_one[x]
+              purrr::reduce(sum)
+          ) * (digit_idx_str[i] - 1)
         }) %>%
-          # Sum the nodes from different layers
-          purrr::reduce(sum, .init = 0)
+          purrr::reduce(sum) +
+          # Add the number of nodes in the path
+          length(digit_idx_str)
       )
     }) -
     # Turn the code to 0-based
